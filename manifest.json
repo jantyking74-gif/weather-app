@@ -1,0 +1,16 @@
+{
+  "name": "CYBER-WEATHER OS",
+  "short_name": "CW-OS",
+  "description": "Ultra-modern 3D Live Weather App",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#050505",
+  "theme_color": "#00f3ff",
+  "icons": [
+    {
+      "src": "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/svgs/solid/meteor.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml"
+    }
+  ]
+}
