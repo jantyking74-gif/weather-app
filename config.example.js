@@ -1,0 +1,3 @@
+window.CWOS_CONFIG = {
+    OWM_API_KEY: 'YOUR_OWM_API_KEY_HERE'
+};

@@ -3,7 +3,7 @@
 // ==========================================
 // CONFIGURATION
 // ==========================================
-const OWM_API_KEY = 'YOUR_OWM_API_KEY_HERE'; // Replace with OpenWeatherMap API Key
+const OWM_API_KEY = window.CWOS_CONFIG?.OWM_API_KEY || 'YOUR_OWM_API_KEY_HERE';
 let currentUnit = 'C';
 let recentSearches = JSON.parse(localStorage.getItem('cwos_recent')) || [];
 
@@ -208,7 +208,12 @@ function getWeatherIcon(code, isDay = true) {
 async function fetchWeather(location) {
     try {
         if (OWM_API_KEY && OWM_API_KEY !== 'YOUR_OWM_API_KEY_HERE') {
-            await fetchOWM(location);
+            try {
+                await fetchOWM(location);
+            } catch (e) {
+                console.warn("OWM API failed. Falling back to Open-Meteo API.", e);
+                await fetchOpenMeteo(location);
+            }
         } else {
             console.warn("OWM API key missing. Falling back to Open-Meteo API for real-time rich data.");
             await fetchOpenMeteo(location);
@@ -477,4 +482,11 @@ window.onload = () => {
     setTimeout(() => {
         autoDetectLocation();
     }, 2000);
+
+    // PWA Service Worker Registration
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('./sw.js')
+            .then(() => console.log('PWA Service Worker Registered'))
+            .catch(err => console.warn('Service Worker Registration Failed', err));
+    }
 };
