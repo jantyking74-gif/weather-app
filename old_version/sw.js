@@ -1,4 +1,4 @@
-const CACHE_NAME = 'cwos-v2';
+const CACHE_NAME = 'cwos-v3';
 const urlsToCache = [
   './',
   './index.html',

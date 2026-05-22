@@ -1,0 +1,154 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-cyber-bg text-cyber-text font-rajdhani select-none overflow-hidden h-screen w-screen;
+    background-image: radial-gradient(circle at 50% 50%, #0d111d 0%, #030303 100%);
+  }
+
+  /* Custom Scrollbar styling */
+  ::-webkit-scrollbar {
+    @apply w-1.5 h-1.5;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-black/40 rounded-full;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-cyber-cyan/30 rounded-full border border-cyber-cyan/10 transition-colors hover:bg-cyber-cyan/60;
+  }
+}
+
+/* Cyberpunk Scanner Overlays */
+.scanlines {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    rgba(18, 16, 16, 0) 50%, 
+    rgba(0, 0, 0, 0.25) 50%
+  ), linear-gradient(
+    90deg,
+    rgba(255, 0, 0, 0.06),
+    rgba(0, 255, 0, 0.02),
+    rgba(0, 0, 255, 0.06)
+  );
+  background-size: 100% 4px, 6px 100%;
+  z-index: 999;
+  pointer-events: none;
+}
+
+/* Holographic Dot Matrix Texture */
+.dot-grid {
+  background-image: radial-gradient(rgba(0, 243, 255, 0.07) 1px, transparent 1px);
+  background-size: 16px 16px;
+}
+
+/* Glassmorphism Card Core */
+.glass-panel {
+  @apply bg-cyber-card border border-cyber-border rounded-2xl shadow-glass-neon backdrop-blur-md;
+  background-image: linear-gradient(
+    135deg, 
+    rgba(255, 255, 255, 0.03) 0%, 
+    rgba(255, 255, 255, 0.01) 100%
+  );
+}
+
+.glass-panel-glow {
+  @apply glass-panel transition-all duration-300;
+}
+.glass-panel-glow:hover {
+  @apply border-cyber-cyan/40 shadow-cyan-glow;
+  background-image: linear-gradient(
+    135deg, 
+    rgba(0, 243, 255, 0.06) 0%, 
+    rgba(255, 255, 255, 0.02) 100%
+  );
+}
+
+/* Neon Text Glow Styles */
+.neon-glow-text {
+  text-shadow: 0 0 10px rgba(0, 243, 255, 0.6), 0 0 20px rgba(0, 243, 255, 0.3);
+}
+
+.neon-pink-text {
+  text-shadow: 0 0 10px rgba(255, 0, 234, 0.6), 0 0 20px rgba(255, 0, 234, 0.3);
+}
+
+.neon-orange-text {
+  text-shadow: 0 0 10px rgba(255, 170, 0, 0.6), 0 0 20px rgba(255, 170, 0, 0.3);
+}
+
+/* 3D Parallax Tilt Card Transitions */
+.tilt-card-layer {
+  transform-style: preserve-3d;
+  transition: transform 0.15s ease-out;
+}
+
+/* Glitch animation utility */
+.glitch-clip-text {
+  position: relative;
+}
+.glitch-clip-text::before,
+.glitch-clip-text::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: black;
+}
+.glitch-clip-text::before {
+  left: 2px;
+  text-shadow: -1px 0 #ff00ea;
+  clip: rect(44px, 450px, 56px, 0);
+  animation: glitch-anim 5s infinite linear alternate-reverse;
+}
+.glitch-clip-text::after {
+  left: -2px;
+  text-shadow: -1px 0 #00f3ff, 0 1px #00f3ff;
+  clip: rect(85px, 450px, 140px, 0);
+  animation: glitch-anim2 5s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim {
+  0% { clip: rect(31px, 9999px, 94px, 0); }
+  10% { clip: rect(112px, 9999px, 76px, 0); }
+  20% { clip: rect(85px, 9999px, 5px, 0); }
+  30% { clip: rect(27px, 9999px, 115px, 0); }
+  40% { clip: rect(73px, 9999px, 29px, 0); }
+  50% { clip: rect(118px, 9999px, 142px, 0); }
+  60% { clip: rect(9px, 9999px, 55px, 0); }
+  70% { clip: rect(104px, 9999px, 120px, 0); }
+  80% { clip: rect(2px, 9999px, 88px, 0); }
+  90% { clip: rect(51px, 9999px, 63px, 0); }
+  100% { clip: rect(139px, 9999px, 10px, 0); }
+}
+
+@keyframes glitch-anim2 {
+  0% { clip: rect(76px, 9999px, 116px, 0); }
+  11% { clip: rect(24px, 9999px, 64px, 0); }
+  22% { clip: rect(122px, 9999px, 34px, 0); }
+  33% { clip: rect(4px, 9999px, 89px, 0); }
+  44% { clip: rect(97px, 9999px, 123px, 0); }
+  55% { clip: rect(54px, 9999px, 15px, 0); }
+  66% { clip: rect(82px, 9999px, 105px, 0); }
+  77% { clip: rect(138px, 9999px, 47px, 0); }
+  88% { clip: rect(13px, 9999px, 58px, 0); }
+  100% { clip: rect(90px, 9999px, 142px, 0); }
+}
+
+/* Custom Radar leaf styling */
+.dark-leaflet .leaflet-tile-container {
+  filter: invert(100%) hue-rotate(180deg) brightness(85%) contrast(110%);
+}
+.dark-leaflet .leaflet-container {
+  background: #030303;
+}
+.dark-leaflet .leaflet-bar a {
+  @apply bg-cyber-bg border-cyber-border text-cyber-cyan hover:bg-cyber-cyan hover:text-black transition-all;
+}

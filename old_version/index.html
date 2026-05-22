@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CYBER-WEATHER OS</title>
+    <!-- Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+    <meta name="description" content="Ultra-modern 3D Live Weather Dashboard">
+    <link rel="manifest" href="manifest.json">
+</head>
+
+<body>
+
+    <canvas id="webgl-canvas"></canvas>
+
+    <!-- Intro Loading Screen -->
+    <div id="startup-screen">
+        <div class="hologram-loader">
+            <div class="glitch-icon"><i class="fa-solid fa-meteor"></i></div>
+            <div class="glitch-text" data-text="INITIALIZING CYBER-WEATHER OS">INITIALIZING CYBER-WEATHER OS</div>
+            <div class="loading-bar">
+                <div class="loading-progress"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main UI Container -->
+    <div class="ui-layer" id="main-ui" style="opacity: 0;">
+
+        <!-- Sidebar -->
+        <nav class="sidebar glass">
+            <div class="logo">
+                <i class="fa-solid fa-meteor"></i>
+                <span>CW-OS</span>
+            </div>
+
+            <div class="search-container">
+                <div class="search-input-wrapper">
+                    <input type="text" id="city-input" placeholder="Initialize Search...">
+                    <button id="search-btn" class="neon-btn"><i class="fa-solid fa-search"></i></button>
+                </div>
+                <div class="quick-actions">
+                    <button id="location-btn" class="neon-btn icon-btn" title="Auto-Detect Location"><i
+                            class="fa-solid fa-location-crosshairs"></i></button>
+                    <button id="voice-btn" class="neon-btn icon-btn" title="Voice Search"><i
+                            class="fa-solid fa-microphone"></i></button>
+                </div>
+            </div>
+
+            <div class="recent-searches">
+                <h3><i class="fa-solid fa-clock-rotate-left"></i> Memory Bank</h3>
+                <ul id="recent-list"></ul>
+            </div>
+
+            <div class="controls">
+                <button id="unit-toggle" class="neon-btn outline">SYS: °C</button>
+            </div>
+        </nav>
+
+        <!-- Main Dashboard -->
+        <main class="dashboard">
+
+            <header class="top-header glass tilt-card">
+                <div class="location-info">
+                    <h1 id="city-name" class="neon-text">SYSTEM STANDBY</h1>
+                    <p id="datetime" class="typing-text">--</p>
+                </div>
+                <div class="alerts-container">
+                    <div id="weather-alert" class="alert-box hidden">
+                        <i class="fa-solid fa-triangle-exclamation"></i> <span id="alert-text">No active alerts</span>
+                    </div>
+                </div>
+            </header>
+
+            <div class="grid-layout">
+
+                <!-- Current Weather -->
+                <section class="card glass current-weather tilt-card">
+                    <div class="weather-main">
+                        <div class="weather-icon-3d" id="current-icon"><i class="fa-solid fa-cloud"></i></div>
+                        <div class="temp-box">
+                            <h2 id="temp" class="neon-text">--°</h2>
+                            <p id="condition">Awaiting Input</p>
+                        </div>
+                    </div>
+                    <div class="feels-like">Feels like: <span id="feels-like" class="neon-text-sm">--°</span></div>
+                </section>
+
+                <!-- Key Metrics Grid -->
+                <section class="card glass metrics tilt-card">
+                    <div class="metric"><i class="fa-solid fa-droplet"></i><span>Humidity</span><strong
+                            id="humidity">--%</strong></div>
+                    <div class="metric"><i class="fa-solid fa-wind"></i><span>Wind</span><strong id="wind">--</strong>
+                    </div>
+                    <div class="metric"><i class="fa-solid fa-gauge-high"></i><span>Pressure</span><strong
+                            id="pressure">--</strong></div>
+                    <div class="metric"><i class="fa-solid fa-eye"></i><span>Visibility</span><strong
+                            id="visibility">--</strong></div>
+                    <div class="metric"><i class="fa-solid fa-sun"></i><span>UV Index</span><strong id="uv">--</strong>
+                    </div>
+                    <div class="metric"><i class="fa-solid fa-leaf"></i><span>AQI</span><strong id="aqi">--</strong>
+                    </div>
+                </section>
+
+                <!-- Sun Cycle -->
+                <section class="card glass sun-cycle tilt-card">
+                    <div class="cycle"><i class="fa-regular fa-sun neon-icon"></i> <span>Sunrise</span> <strong
+                            id="sunrise">--:--</strong></div>
+                    <div class="cycle"><i class="fa-solid fa-moon neon-icon"></i> <span>Sunset</span> <strong
+                            id="sunset">--:--</strong></div>
+                </section>
+
+                <!-- Hourly Forecast -->
+                <section class="card glass hourly tilt-card">
+                    <h3><i class="fa-solid fa-clock"></i> 24H Projection</h3>
+                    <div class="scroll-x" id="hourly-forecast">
+                        <!-- JS Injection -->
+                    </div>
+                </section>
+
+                <!-- 7 Day Forecast -->
+                <section class="card glass daily tilt-card">
+                    <h3><i class="fa-solid fa-calendar-days"></i> 7-Day Matrix</h3>
+                    <div class="scroll-y" id="daily-forecast">
+                        <!-- JS Injection -->
+                    </div>
+                </section>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
